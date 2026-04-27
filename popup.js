@@ -34,31 +34,32 @@ async function getLocalIp() {
 }
 
 // Copiar IP al portapapeles
-function copiarIP(elementId, button) {
-  const ipElement = document.getElementById(elementId);
-  const ip = ipElement.textContent;
-  
-  if (ip === 'Cargando...' || ip === 'Error al obtener IP') {
-    alert('No hay IP para copiar');
-    return;
-  }
-  
-  // Copiar al portapapeles
-  navigator.clipboard.writeText(ip).then(() => {
-    // Cambiar boton temporalmente
-    const originalText = button.textContent;
-    button.textContent = 'Copiado!';
-    button.style.background = '#28a745';
+document.querySelectorAll('.copy-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    const ipId = this.getAttribute('data-ip');
+    const ipElement = document.getElementById(ipId);
+    const ip = ipElement.textContent;
     
-    setTimeout(() => {
-      button.textContent = originalText;
-      button.style.background = '#28a745';
-    }, 2000);
-  }).catch(err => {
-    console.error('Error al copiar:', err);
-    alert('No se pudo copiar la IP');
+    if (ip === 'Cargando...' || ip === 'Error al obtener IP') {
+      alert('No hay IP para copiar');
+      return;
+    }
+    
+    navigator.clipboard.writeText(ip).then(() => {
+      const originalText = this.textContent;
+      this.textContent = '✓';
+      this.style.background = '#28a745';
+      
+      setTimeout(() => {
+        this.textContent = originalText;
+        this.style.background = '#28a745';
+      }, 2000);
+    }).catch(err => {
+      console.error('Error al copiar:', err);
+      alert('No se pudo copiar la IP');
+    });
   });
-}
+});
 
 // Ejecutar al cargar
 getLocalIp();
