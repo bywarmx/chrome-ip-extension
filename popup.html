@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      width: 300px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #333;
+      margin-top: 0;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+    }
+    .ip-box {
+      background: #f9f9f9;
+      border-left: 4px solid #007bff;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 4px;
+      word-break: break-all;
+    }
+    .label {
+      font-weight: bold;
+      color: #555;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .ip-value {
+      color: #007bff;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 5px;
+      font-family: monospace;
+    }
+    .loading {
+      color: #999;
+      font-style: italic;
+    }
+    .error {
+      color: #d32f2f;
+      background: #ffebee;
+      border-left-color: #d32f2f;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📍 Mi IP</h2>
+    
+    <div class="ip-box">
+      <div class="label">IP Local</div>
+      <div class="ip-value" id="localIp">Cargando...</div>
+    </div>
+    
+    <div class="ip-box">
+      <div class="label">IP Pública</div>
+      <div class="ip-value" id="publicIp">Cargando...</div>
+    </div>
+    
+    <button onclick="location.reload()">🔄 Actualizar</button>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

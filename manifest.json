@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "IP Address Viewer",
+  "version": "1.0",
+  "description": "Muestra tu IP local y pública con un clic",
+  "permissions": ["activeTab"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "host_permissions": [
+    "https://api.ipify.org/*"
+  ]
+}
