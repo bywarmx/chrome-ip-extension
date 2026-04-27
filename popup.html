@@ -59,23 +59,13 @@
       font-size: 14px;
       margin-left: 10px;
       transition: background 0.2s;
+      white-space: nowrap;
     }
     .copy-btn:hover {
       background: #218838;
     }
     .copy-btn:active {
       background: #1e7e34;
-    }
-    .copy-feedback {
-      display: none;
-      position: absolute;
-      background: #28a745;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-size: 12px;
-      margin-top: -35px;
-      margin-left: 100px;
     }
     .error {
       color: #d32f2f;
@@ -101,14 +91,14 @@
 </head>
 <body>
   <div class="container">
-    <h2>📍 Mi IP</h2>
+    <h2>Mi IP</h2>
     
     <div class="ip-box">
       <div class="ip-content">
         <div class="label">IP Local</div>
         <div class="ip-value" id="localIp">Cargando...</div>
       </div>
-      <button class="copy-btn" onclick="copiarIP('localIp')">📋</button>
+      <button class="copy-btn" onclick="copiarIP('localIp', this)">Copiar</button>
     </div>
     
     <div class="ip-box">
@@ -116,7 +106,7 @@
         <div class="label">IP Publica</div>
         <div class="ip-value" id="publicIp">Cargando...</div>
       </div>
-      <button class="copy-btn" onclick="copiarIP('publicIp')">📋</button>
+      <button class="copy-btn" onclick="copiarIP('publicIp', this)">Copiar</button>
     </div>
     
     <button class="refresh-btn" onclick="location.reload()">Actualizar</button>
