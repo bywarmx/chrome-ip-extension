@@ -34,7 +34,7 @@ async function getLocalIp() {
 }
 
 // Copiar IP al portapapeles
-function copiarIP(elementId) {
+function copiarIP(elementId, button) {
   const ipElement = document.getElementById(elementId);
   const ip = ipElement.textContent;
   
@@ -43,17 +43,20 @@ function copiarIP(elementId) {
     return;
   }
   
+  // Copiar al portapapeles
   navigator.clipboard.writeText(ip).then(() => {
     // Cambiar boton temporalmente
-    const button = event.target;
     const originalText = button.textContent;
-    button.textContent = '✓';
+    button.textContent = 'Copiado!';
     button.style.background = '#28a745';
     
     setTimeout(() => {
       button.textContent = originalText;
       button.style.background = '#28a745';
     }, 2000);
+  }).catch(err => {
+    console.error('Error al copiar:', err);
+    alert('No se pudo copiar la IP');
   });
 }
 
