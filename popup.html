@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <style>
     body {
-      width: 300px;
+      width: 350px;
       padding: 20px;
       font-family: Arial, sans-serif;
       background: #f5f5f5;
+      margin: 0;
     }
     .container {
       background: white;
@@ -24,9 +26,14 @@
       background: #f9f9f9;
       border-left: 4px solid #007bff;
       padding: 12px;
-      margin: 10px 0;
+      margin: 15px 0;
       border-radius: 4px;
-      word-break: break-all;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ip-content {
+      flex: 1;
     }
     .label {
       font-weight: bold;
@@ -40,17 +47,42 @@
       font-weight: bold;
       margin-top: 5px;
       font-family: monospace;
+      word-break: break-all;
     }
-    .loading {
-      color: #999;
-      font-style: italic;
+    .copy-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 10px;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover {
+      background: #218838;
+    }
+    .copy-btn:active {
+      background: #1e7e34;
+    }
+    .copy-feedback {
+      display: none;
+      position: absolute;
+      background: #28a745;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-top: -35px;
+      margin-left: 100px;
     }
     .error {
       color: #d32f2f;
       background: #ffebee;
       border-left-color: #d32f2f;
     }
-    button {
+    .refresh-btn {
       width: 100%;
       padding: 10px;
       margin-top: 15px;
@@ -60,8 +92,9 @@
       border-radius: 4px;
       cursor: pointer;
       font-size: 14px;
+      transition: background 0.2s;
     }
-    button:hover {
+    .refresh-btn:hover {
       background: #0056b3;
     }
   </style>
@@ -71,16 +104,22 @@
     <h2>📍 Mi IP</h2>
     
     <div class="ip-box">
-      <div class="label">IP Local</div>
-      <div class="ip-value" id="localIp">Cargando...</div>
+      <div class="ip-content">
+        <div class="label">IP Local</div>
+        <div class="ip-value" id="localIp">Cargando...</div>
+      </div>
+      <button class="copy-btn" onclick="copiarIP('localIp')">📋</button>
     </div>
     
     <div class="ip-box">
-      <div class="label">IP Pública</div>
-      <div class="ip-value" id="publicIp">Cargando...</div>
+      <div class="ip-content">
+        <div class="label">IP Publica</div>
+        <div class="ip-value" id="publicIp">Cargando...</div>
+      </div>
+      <button class="copy-btn" onclick="copiarIP('publicIp')">📋</button>
     </div>
     
-    <button onclick="location.reload()">🔄 Actualizar</button>
+    <button class="refresh-btn" onclick="location.reload()">Actualizar</button>
   </div>
   
   <script src="popup.js"></script>
