@@ -3,115 +3,156 @@
 <head>
   <meta charset="UTF-8">
   <style>
-    body {
-      width: 350px;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      width: 400px;
+      padding: 15px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: #f0f2f5;
     }
     .container {
       background: white;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    h2 {
-      color: #333;
+    h3 {
+      color: #1a1a1a;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 18px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #666;
+    }
+    h3:first-of-type {
       margin-top: 0;
-      border-bottom: 2px solid #007bff;
-      padding-bottom: 10px;
     }
-    .ip-box {
-      background: #f9f9f9;
-      border-left: 4px solid #007bff;
+    .ip-section {
+      margin-bottom: 20px;
+    }
+    .ip-display {
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
       padding: 12px;
-      margin: 15px 0;
-      border-radius: 4px;
+      margin-bottom: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-    .ip-content {
-      flex: 1;
-    }
-    .label {
-      font-weight: bold;
-      color: #555;
-      font-size: 12px;
-      text-transform: uppercase;
+      gap: 10px;
     }
     .ip-value {
-      color: #007bff;
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 5px;
-      font-family: monospace;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: #1a1a1a;
+      word-break: break-all;
+      flex: 1;
+    }
+    .ip-list {
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 8px;
+    }
+    .ip-item {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: #1a1a1a;
+      padding: 6px;
+      border-bottom: 1px solid #e8e8e8;
       word-break: break-all;
     }
-    .copy-btn {
-      background: #28a745;
-      color: white;
+    .ip-item:last-child {
+      border-bottom: none;
+    }
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    button {
+      flex: 1;
+      padding: 8px 12px;
       border: none;
-      border-radius: 4px;
-      padding: 8px 10px;
+      border-radius: 5px;
       cursor: pointer;
-      font-size: 16px;
-      margin-left: 10px;
+      font-size: 12px;
+      font-weight: 600;
       transition: background 0.2s;
-      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .copy-btn {
+      background: #007bff;
+      color: white;
     }
     .copy-btn:hover {
-      background: #218838;
+      background: #0056b3;
     }
-    .copy-btn:active {
-      background: #1e7e34;
+    .clear-btn {
+      background: #dc3545;
+      color: white;
+      padding: 8px 12px;
+    }
+    .clear-btn:hover {
+      background: #c82333;
+    }
+    .loading {
+      color: #999;
+      font-style: italic;
+      font-size: 12px;
     }
     .error {
       color: #d32f2f;
       background: #ffebee;
-      border-left-color: #d32f2f;
+      border-color: #d32f2f;
     }
-    .refresh-btn {
-      width: 100%;
-      padding: 10px;
-      margin-top: 15px;
-      background: #007bff;
-      color: white;
-      border: none;
+    .success {
+      background: #d4edda;
+      color: #155724;
+      border-color: #c3e6cb;
+      padding: 8px 12px;
       border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background 0.2s;
-    }
-    .refresh-btn:hover {
-      background: #0056b3;
+      font-size: 12px;
+      margin-bottom: 8px;
+      display: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Mi IP</h2>
-    
-    <div class="ip-box">
-      <div class="ip-content">
-        <div class="label">IP Local</div>
-        <div class="ip-value" id="localIp">Cargando...</div>
+    <div id="success" class="success">Copiado al portapapeles!</div>
+
+    <div class="ip-section">
+      <h3>IP Publica Actual</h3>
+      <div class="ip-display">
+        <span class="ip-value" id="publicIp">Cargando...</span>
+        <button class="copy-btn" onclick="copiar('publicIp', 'success')">Copiar</button>
       </div>
-      <button class="copy-btn" data-ip="localIp">📋</button>
     </div>
-    
-    <div class="ip-box">
-      <div class="ip-content">
-        <div class="label">IP Publica</div>
-        <div class="ip-value" id="publicIp">Cargando...</div>
-      </div>
-      <button class="copy-btn" data-ip="publicIp">📋</button>
+
+    <div class="ip-section">
+      <h3>IPs Publicas Anteriores</h3>
+      <div class="ip-list" id="publicHistory"></div>
+      <button class="clear-btn" onclick="limpiarHistorial('publicHistory')">Limpiar Historial</button>
+      <button class="copy-btn" onclick="copiarTodas('publicHistory', 'success')">Copiar Todas</button>
     </div>
-    
-    <button class="refresh-btn" onclick="location.reload()">Actualizar</button>
+
+    <div class="ip-section">
+      <h3>IP Local</h3>
+      <div class="ip-list" id="localIps"></div>
+      <button class="copy-btn" onclick="copiarTodas('localIps', 'success')">Copiar Todas</button>
+    </div>
   </div>
-  
+
   <script src="popup.js"></script>
 </body>
 </html>
