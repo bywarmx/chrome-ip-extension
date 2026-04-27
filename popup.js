@@ -1,4 +1,4 @@
-// Obtener IP Pública
+// Obtener IP Publica
 async function getPublicIp() {
   try {
     const response = await fetch('https://api.ipify.org?format=json');
@@ -31,6 +31,30 @@ async function getLocalIp() {
     document.getElementById('localIp').textContent = 'Error al obtener IP';
     document.getElementById('localIp').parentElement.classList.add('error');
   }
+}
+
+// Copiar IP al portapapeles
+function copiarIP(elementId) {
+  const ipElement = document.getElementById(elementId);
+  const ip = ipElement.textContent;
+  
+  if (ip === 'Cargando...' || ip === 'Error al obtener IP') {
+    alert('No hay IP para copiar');
+    return;
+  }
+  
+  navigator.clipboard.writeText(ip).then(() => {
+    // Cambiar boton temporalmente
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = '✓';
+    button.style.background = '#28a745';
+    
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.style.background = '#28a745';
+    }, 2000);
+  });
 }
 
 // Ejecutar al cargar
